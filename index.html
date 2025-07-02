@@ -87,7 +87,21 @@
   });
 
   jsPsych.init({
-    timeline: timeline
+    timeline: timeline,
+    on_finish: function () {
+      const csvData = jsPsych.data.get().csv();
+
+      fetch("https://script.google.com/macros/s/AKfycbxwtwFOFowkuQEQU8Iy91oEjWkoya9VmGdTIcqV4-YeCOqjaq-8pa2qz6nv5RJ7kFHW/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "data=" + encodeURIComponent(csvData)
+      }).then(() => {
+        alert("Thank you! Your responses have been saved.");
+      });
+    }
   });
 </script>
 </html>
