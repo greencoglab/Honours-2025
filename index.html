@@ -2,11 +2,12 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>HOnours 2025 pilot</title>
+  <title>Honours 2025 pilot</title>
   <script src="https://unpkg.com/jspsych@6.3.1/jspsych.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-preload.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-survey-likert.js"></script>
+  <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
   <link href="https://unpkg.com/jspsych@6.3.1/css/jspsych.css" rel="stylesheet" />
 </head>
 <body></body>
@@ -86,25 +87,33 @@
     );
   });
 
+  const end_screen = {
+    type: 'html-keyboard-response',
+    stimulus: "<p>Thank you for completing the study.</p><p>Your responses are being saved.</p><p>You will be redirected shortly...</p>",
+    choices: jsPsych.NO_KEYS,
+    trial_duration: 2000
+  };
+
+  timeline.push(end_screen);
+
   jsPsych.init({
-  timeline: timeline,
-  on_finish: function () {
-    const csvData = jsPsych.data.get().csv();
-
-    fetch("https://script.google.com/macros/s/AKfycbxwtwFOFowkuQEQU8Iy91oEjWkoya9VmGdTIcqV4-YeCOqjaq-8pa2qz6nv5RJ7kFHW/exec", {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      body: "data=" + encodeURIComponent(csvData)
-    });
-
-    // Delay redirect to allow time for data to be sent
-    setTimeout(function () {
-      window.location.href = "https://adelaideunisop.syd1.qualtrics.com/jfe/form/SV_3VFqrmNxkKjcuXQ";
-    }, 1000); // 1000 ms = 1 second
-  }
-});
+    timeline: timeline,
+    on_finish: function () {
+      const csvData = jsPsych.data.get().csv();
+//redirect to Qual
+      fetch("https://script.google.com/macros/s/AKfycbxwtwFOFowkuQEQU8Iy91oEjWkoya9VmGdTIcqV4-YeCOqjaq-8pa2qz6nv5RJ7kFHW/exec", {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: "data=" + encodeURIComponent(csvData)
+      });
+//may need to make longer - delay for data send
+      setTimeout(function () {
+        window.location.href = "https://adelaideunisop.syd1.qualtrics.com/jfe/form/SV_3VFqrmNxkKjcuXQ";
+      }, 2500); 
+    }
+  });
 </script>
 </html>
