@@ -1,1 +1,0 @@
-// Placeholder for plugin-image-keyboard-response.js

@@ -1,1 +1,0 @@
-// Placeholder for plugin-survey-likert.js
