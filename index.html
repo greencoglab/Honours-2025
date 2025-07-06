@@ -13,48 +13,67 @@
 <body></body>
 
 <script>
-  const trial_images = [
-    { img1: 'img/fixation.png', img2: 'img/baseballbase_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/baseballcatch_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/baseballhit_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/basketball_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/birthday_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/bowling_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/boy_game_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/boy_pulling_tree_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/bride_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/bubbles_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/construction_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/cyclist_trail_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/diver_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/falcon_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/family_toboggan_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/fieldhockey_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/fireman_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/fishing_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/footballcatch_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/footballkick_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/golfhit_C.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/golf_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/gymnastics_C.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/highjump_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/hockey_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/horsejump_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/juggler_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/lacrosse_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/lawnbowler_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/pizza_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/pool_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/soccerkick_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/soccer_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/squirrel_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/tennis_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/track_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/volleyball_c.jpg', img3: 'img/mask.jpg' },
-    { img1: 'img/fixation.png', img2: 'img/woman_and_dog_c.jpg', img3: 'img/mask.jpg' }
+  const timeline = [];
+
+  const preload_images = [
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fixation.png",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/mask.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/baseballbase_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/baseballcatch_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/baseballhit_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/basketball_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/birthday_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/bowling_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/boy_game_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/boy_pulling_tree_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/bride_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/bubbles_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/construction_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/cyclist_trail_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/diver_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/falcon_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/family_toboggan_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fieldhockey_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fireman_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fishing_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/footballcatch_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/footballkick_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/golfhit_C.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/golf_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/gymnastics_C.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/highjump_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/hockey_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/horsejump_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/juggler_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/lacrosse_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/lawnbowler_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/pizza_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/pool_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/soccerkick_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/soccer_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/squirrel_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/tennis_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/track_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/volleyball_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/woman_and_dog_c.jpg"
   ];
 
-  const timeline = [];
+  timeline.push({
+    type: 'preload',
+    images: preload_images,
+    message: `
+      <p>Loading images...</p>
+      <p><strong>Please wait</strong>. The experiment will begin automatically.</p>
+    `
+  });
+
+  const trial_images = preload_images
+    .filter(img => img.includes("_c.jpg")) // select target images only
+    .map(img2 => ({
+      img1: "img/fixation.jpg",
+      img2: "img/" + img2.split("/").pop(), // get filename only
+      img3: "img/mask.jpg"
+    }));
 
   trial_images.forEach(trial => {
     timeline.push(
@@ -79,7 +98,7 @@
       {
         type: 'survey-likert',
         questions: [{
-          prompt: '<img src="' + trial.img2 + '" style="max-height:800px;"><br><br>Compared to when you first saw this image, the camera distance is...',
+          prompt: `<img src="${trial.img2}" style="max-height:800px;"><br><br>Compared to when you first saw this image, the camera distance is...`,
           labels: ["Much farther away", "Slightly farther", "The same", "Slightly closer", "Much closer"],
           required: true
         }]
@@ -87,32 +106,10 @@
     );
   });
 
-  const end_screen = {
-    type: 'html-keyboard-response',
-    stimulus: "<p>Thank you for completing the study.</p><p>Your responses are being saved.</p><p>You will be redirected shortly...</p>",
-    choices: jsPsych.NO_KEYS,
-    trial_duration: 2000
-  };
-
-  timeline.push(end_screen);
-
   jsPsych.init({
     timeline: timeline,
     on_finish: function () {
-      const csvData = jsPsych.data.get().csv();
-//redirect to Qual
-      fetch("https://script.google.com/macros/s/AKfycbxwtwFOFowkuQEQU8Iy91oEjWkoya9VmGdTIcqV4-YeCOqjaq-8pa2qz6nv5RJ7kFHW/exec", {
-        method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: "data=" + encodeURIComponent(csvData)
-      });
-//may need to make longer - delay for data send
-      setTimeout(function () {
-        window.location.href = "https://adelaideunisop.syd1.qualtrics.com/jfe/form/SV_3VFqrmNxkKjcuXQ";
-      }, 2500); 
+      jsPsych.data.displayData("csv");
     }
   });
 </script>
