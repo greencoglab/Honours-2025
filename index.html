@@ -7,7 +7,6 @@
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-preload.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-survey-likert.js"></script>
-  <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
   <link href="https://unpkg.com/jspsych@6.3.1/css/jspsych.css" rel="stylesheet" />
 </head>
 <body></body>
@@ -61,44 +60,38 @@
   timeline.push({
     type: 'preload',
     images: preload_images,
-    message: `
-      <p>Loading images...</p>
-      <p><strong>Please wait</strong>. The experiment will begin automatically.</p>
-    `
+    message: '<p>Loading images…</p><p><strong>Please wait.</strong> The experiment will begin automatically.</p>'
   });
 
-  const trial_images = preload_images
-    .filter(img => img.includes("_c.jpg")) // select target images only
-    .map(img2 => ({
-      img1: "img/fixation.jpg",
-      img2: "img/" + img2.split("/").pop(), // get filename only
-      img3: "img/mask.jpg"
-    }));
+  const fixation = "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fixation.png";
+  const mask = "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/mask.jpg";
 
-  trial_images.forEach(trial => {
+  const target_images = preload_images.filter(img => img.includes('_c.jpg'));
+
+  target_images.forEach(img_url => {
     timeline.push(
       {
         type: 'image-keyboard-response',
-        stimulus: trial.img1,
+        stimulus: fixation,
         choices: jsPsych.NO_KEYS,
         trial_duration: 800
       },
       {
         type: 'image-keyboard-response',
-        stimulus: trial.img2,
+        stimulus: img_url,
         choices: jsPsych.NO_KEYS,
         trial_duration: 250
       },
       {
         type: 'image-keyboard-response',
-        stimulus: trial.img3,
+        stimulus: mask,
         choices: jsPsych.NO_KEYS,
         trial_duration: 42
       },
       {
         type: 'survey-likert',
         questions: [{
-          prompt: `<img src="${trial.img2}" style="max-height:800px;"><br><br>Compared to when you first saw this image, the camera distance is...`,
+          prompt: `<img src="${img_url}" style="max-height:800px;"><br><br>Compared to when you first saw this image, the camera distance is...`,
           labels: ["Much farther away", "Slightly farther", "The same", "Slightly closer", "Much closer"],
           required: true
         }]
@@ -109,7 +102,7 @@
   jsPsych.init({
     timeline: timeline,
     on_finish: function () {
-      jsPsych.data.displayData("csv");
+      jsPsych.data.displayData('csv');
     }
   });
 </script>
