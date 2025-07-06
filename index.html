@@ -54,7 +54,12 @@
     { img1: 'img/fixation.png', img2: 'img/woman_and_dog_c.jpg', img3: 'img/mask.jpg' }
   ];
 
-  const timeline = [];
+  const preload_images = trial_images.flatMap(trial => [trial.img1, trial.img2, trial.img3]);
+
+timeline.push({
+  type: 'preload',
+  images: preload_images
+});
 
   trial_images.forEach(trial => {
     timeline.push(
