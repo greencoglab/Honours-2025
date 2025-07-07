@@ -113,12 +113,24 @@
     );
   });
 
-   jsPsych.init({
-    timeline: timeline,
-    on_finish: function () {
-      // Send a message to the Qualtrics parent page to signal experiment completion
-      window.parent.postMessage("experiment_complete", "*");
-    }
-  });
+  jsPsych.init({
+  timeline: timeline,
+  on_finish: function () {
+    const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
+    
+    const responses = testData.map(trial => {
+      return {
+        image: trial.stimulus,  // image shown in the Likert question
+        response: trial.response
+      };
+    });
+
+    // Send message to parent Qualtrics frame
+    window.parent.postMessage({
+      type: "jspsych_complete",
+      responses: responses
+    }, "*");
+  }
+});
 </script>
 </html>
