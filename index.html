@@ -10,10 +10,17 @@
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
   <link href="https://unpkg.com/jspsych@6.3.1/css/jspsych.css" rel="stylesheet" />
   <style>
-    .padded-image {
+    .image-wrapper {
+      margin-bottom: 120px; /* Adds padding BELOW image to match Likert prompt spacing */
+      text-align: center;
+    }
+
+    .image-wrapper img,
+    .test-image {
       max-height: 800px;
       display: block;
-      margin: 100px auto;
+      margin-left: auto;
+      margin-right: auto;
     }
   </style>
 </head>
@@ -79,26 +86,26 @@
     timeline.push(
       {
         type: 'html-keyboard-response',
-        stimulus: `<img src="${fixation}" class="padded-image">`,
+        stimulus: `<div class="image-wrapper"><img src="${fixation}"></div>`,
         choices: jsPsych.NO_KEYS,
         trial_duration: 800
       },
       {
         type: 'html-keyboard-response',
-        stimulus: `<img src="${img_url}" class="padded-image">`,
+        stimulus: `<div class="image-wrapper"><img src="${img_url}"></div>`,
         choices: jsPsych.NO_KEYS,
         trial_duration: 250
       },
       {
         type: 'html-keyboard-response',
-        stimulus: `<img src="${mask}" class="padded-image">`,
+        stimulus: `<div class="image-wrapper"><img src="${mask}"></div>`,
         choices: jsPsych.NO_KEYS,
         trial_duration: 42
       },
       {
         type: 'survey-likert',
         questions: [{
-          prompt: `<img src="${img_url}" class="padded-image"><br><br>Compared to when you first saw this image, the camera distance is...`,
+          prompt: `<img src="${img_url}" class="test-image"><br><br>Compared to when you first saw this image, the camera distance is...`,
           labels: ["Much farther away", "Slightly farther", "The same", "Slightly closer", "Much closer"],
           required: true
         }]
