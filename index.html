@@ -113,10 +113,11 @@
     );
   });
 
-  jsPsych.init({
+   jsPsych.init({
     timeline: timeline,
     on_finish: function () {
-      jsPsych.data.displayData('csv');
+      // Send a message to the Qualtrics parent page to signal experiment completion
+      window.parent.postMessage("experiment_complete", "*");
     }
   });
 </script>
