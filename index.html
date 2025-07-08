@@ -142,33 +142,27 @@
       );
     });
 
-    timeline.push({
-      type: 'html-button-response',
-      stimulus: `
-        <p>Thank you for completing the experiment.</p>
-        <p>Your responses have been recorded.</p>
-        <p><strong>Please click the button below to continue.</strong></p>
-      `,
-      choices: ['Continue'],
-      on_finish: function () {
-  const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
+   timeline.push({
+  type: 'html-keyboard-response',
+  stimulus: `
+    <p>Thank you for completing the experiment.</p>
+    <p>Your responses have been recorded.</p>
+    <p><strong>Press any key to continue.</strong></p>
+  `,
+  on_finish: function () {
+    const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
 
-  const payload = testData.map(trial => ({
-    image: trial.stimulus.match(/src="([^"]+)"/)?.[1] || "unknown",
-    response: trial.response
-  }));
+    const payload = testData.map(trial => ({
+      image: trial.stimulus.match(/src="([^"]+)"/)?.[1] || "unknown",
+      response: trial.response
+    }));
 
-  window.parent.postMessage({
-    type: "jspsych_complete",
-    responses: payload
-  }, "*");
-}
-    });
-
-    jsPsych.init({
-      timeline: timeline,
-      display_element: 'jspsych-target'
-    });
+    window.parent.postMessage({
+      type: "jspsych_complete",
+      responses: payload
+    }, "*");
+  }
+});
   </script>
 </body>
 </html>
