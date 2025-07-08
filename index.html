@@ -52,6 +52,7 @@
   <script>
     const timeline = [];
 
+    // Preload images
     const preload_images = [
       "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fixation.png",
       "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/mask.jpg",
@@ -64,6 +65,7 @@
       message: '<p>Loading images…</p><p><strong>Please wait.</strong> The experiment will begin automatically.</p>'
     });
 
+    // A few sample trials
     const fixation = preload_images[0];
     const mask = preload_images[1];
     const test_img = preload_images[2];
@@ -113,7 +115,7 @@
           response: trial.response
         }));
 
-       
+        // Send to Qualtrics or just console.log for now
         console.log("Sending data:", responses);
 
         window.parent.postMessage({
