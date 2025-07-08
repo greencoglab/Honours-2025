@@ -9,7 +9,23 @@
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-survey-likert.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
   <link href="https://unpkg.com/jspsych@6.3.1/css/jspsych.css" rel="stylesheet" />
+
   <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      background-color: white;
+    }
+
+    #jspsych-content {
+      max-width: 90vw;
+      margin: auto;
+      text-align: center;
+    }
+
     .image-wrapper {
       margin-bottom: 120px;
       text-align: center;
@@ -18,6 +34,8 @@
     .image-wrapper img,
     .test-image {
       max-height: 800px;
+      width: auto;
+      height: auto;
       display: block;
       margin-left: auto;
       margin-right: auto;
