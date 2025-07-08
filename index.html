@@ -151,18 +151,18 @@
       `,
       choices: ['Continue'],
       on_finish: function () {
-        const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
+  const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
 
-        const responses = testData.map(trial => ({
-          image: trial.stimulus,
-          response: trial.response
-        }));
+  const payload = testData.map(trial => ({
+    image: trial.stimulus.match(/src="([^"]+)"/)?.[1] || "unknown",
+    response: trial.response
+  }));
 
-        window.parent.postMessage({
-          type: "jspsych_complete",
-          responses: responses
-        }, "*");
-      }
+  window.parent.postMessage({
+    type: "jspsych_complete",
+    responses: payload
+  }, "*");
+}
     });
 
     jsPsych.init({
