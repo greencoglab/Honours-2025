@@ -114,23 +114,15 @@
   });
 
   const endScreen = {
-    type: 'html-keyboard-response',
+    type: 'html-button-response',
     stimulus: `
-      <div style="text-align: center;">
-        <p>Thank you for completing the experiment.</p>
-        <p>Your responses have been recorded.</p>
-        <p><strong>Please click the button below to continue.</strong></p>
-        <button id="continue-btn" style="font-size: 18px; padding: 10px 20px; margin-top: 20px;">Continue</button>
-      </div>
-      <script>
-        document.getElementById("continue-btn").addEventListener("click", function () {
-          document.dispatchEvent(new KeyboardEvent("keydown", { key: "Enter" }));
-        });
-      </script>
+      <p>Thank you for completing the experiment.</p>
+      <p>Your responses have been recorded.</p>
+      <p><strong>Please click the button below to continue.</strong></p>
     `,
-    choices: jsPsych.ALL_KEYS,
+    choices: ['Continue'],
     on_finish: function () {
-      const testData = jsPsych.data.get().filter({ trial_type: 'survey-likert' }).values();
+      const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
 
       const responses = testData.map(trial => ({
         image: trial.stimulus,
