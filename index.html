@@ -2,35 +2,14 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Honours 2025 Pilot</title>
-
-  <!-- Load jsPsych core and plugin scripts -->
+  <title>Honours 2025 pilot</title>
   <script src="https://unpkg.com/jspsych@6.3.1/jspsych.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-preload.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-image-keyboard-response.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-survey-likert.js"></script>
   <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-html-keyboard-response.js"></script>
-  <script src="https://unpkg.com/jspsych@6.3.1/plugins/jspsych-html-button-response.js"></script>
-
-  <!-- Load jsPsych stylesheet first -->
   <link href="https://unpkg.com/jspsych@6.3.1/css/jspsych.css" rel="stylesheet" />
-
-  <!-- Custom styling -->
   <style>
-    body.jspsych-display-element {
-      font-family: "Helvetica", sans-serif;
-      font-size: 16px;
-      background-color: white;
-      margin: 0;
-      padding: 0;
-    }
-
-    #jspsych-target {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 40px 20px;
-    }
-
     .image-wrapper {
       margin-bottom: 120px;
       text-align: center;
@@ -45,31 +24,65 @@
     }
   </style>
 </head>
+<body></body>
 
-<body>
-  <div id="jspsych-target"></div>
+<script>
+  const timeline = [];
 
-  <script>
-    const timeline = [];
+  const preload_images = [
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fixation.png",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/mask.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/baseballbase_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/baseballcatch_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/baseballhit_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/basketball_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/birthday_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/bowling_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/boy_game_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/boy_pulling_tree_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/bride_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/bubbles_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/construction_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/cyclist_trail_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/diver_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/falcon_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/family_toboggan_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fieldhockey_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fireman_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fishing_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/footballcatch_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/footballkick_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/golfhit_C.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/golf_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/gymnastics_C.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/highjump_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/hockey_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/horsejump_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/juggler_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/lacrosse_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/lawnbowler_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/pizza_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/pool_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/soccerkick_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/soccer_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/squirrel_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/tennis_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/track_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/volleyball_c.jpg",
+    "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/woman_and_dog_c.jpg"
+  ];
 
-    // Preload images
-    const preload_images = [
-      "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fixation.png",
-      "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/mask.jpg",
-      "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/baseballhit_c.jpg"
-    ];
+  timeline.push({
+    type: 'preload',
+    images: preload_images,
+    message: '<p>Loading images…</p><p><strong>Please wait.</strong> The experiment will begin automatically.</p>'
+  });
 
-    timeline.push({
-      type: 'preload',
-      images: preload_images,
-      message: '<p>Loading images…</p><p><strong>Please wait.</strong> The experiment will begin automatically.</p>'
-    });
+  const fixation = "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/fixation.png";
+  const mask = "https://raw.githubusercontent.com/greencoglab/Honours-2025/main/img/mask.jpg";
+  const target_images = preload_images.filter(img => img.includes('_c.jpg'));
 
-    // A few sample trials
-    const fixation = preload_images[0];
-    const mask = preload_images[1];
-    const test_img = preload_images[2];
-
+  target_images.forEach(img_url => {
     timeline.push(
       {
         type: 'html-keyboard-response',
@@ -79,7 +92,7 @@
       },
       {
         type: 'html-keyboard-response',
-        stimulus: `<div class="image-wrapper"><img src="${test_img}"></div>`,
+        stimulus: `<div class="image-wrapper"><img src="${img_url}"></div>`,
         choices: jsPsych.NO_KEYS,
         trial_duration: 250
       },
@@ -92,46 +105,41 @@
       {
         type: 'survey-likert',
         questions: [{
-          prompt: `<img src="${test_img}" class="test-image"><br><br>Compared to when you first saw this image, the camera distance is...`,
+          prompt: `<img src="${img_url}" class="test-image"><br><br>Compared to when you first saw this image, the camera distance is...`,
           labels: ["Much farther away", "Slightly farther", "The same", "Slightly closer", "Much closer"],
           required: true
-        }],
-        data: { image_filename: test_img }
+        }]
       }
     );
+  });
 
-    timeline.push({
-      type: 'html-button-response',
-      stimulus: `
-        <p>Thank you for completing the experiment.</p>
-        <p>Your responses have been recorded.</p>
-        <p><strong>Please click the button below to continue.</strong></p>
-      `,
-      choices: ['Continue'],
-      on_finish: function () {
-        const data = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
-        const responses = data.map(trial => ({
-          image: trial.image_filename,
-          response: trial.response
-        }));
+  const endScreen = {
+    type: 'html-button-response',
+    stimulus: `
+      <p>Thank you for completing the experiment.</p>
+      <p>Your responses have been recorded.</p>
+      <p><strong>Please click the button below to continue.</strong></p>
+    `,
+    choices: ['Continue'],
+    on_finish: function () {
+      const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
 
-        // Send to Qualtrics or just console.log for now
-        console.log("Sending data:", responses);
+      const responses = testData.map(trial => ({
+        image: trial.stimulus,
+        response: trial.response
+      }));
 
-        window.parent.postMessage({
-          type: "jspsych_complete",
-          responses: responses
-        }, "*");
-      }
-    });
+      window.parent.postMessage({
+        type: "jspsych_complete",
+        responses: responses
+      }, "*");
+    }
+  };
 
-    jsPsych.init({
-      timeline: timeline,
-      display_element: 'jspsych-target',
-      on_timeline_error: function (e) {
-        console.error('jsPsych error:', e);
-      }
-    });
-  </script>
-</body>
+  timeline.push(endScreen);
+
+  jsPsych.init({
+    timeline: timeline
+  });
+</script>
 </html>
