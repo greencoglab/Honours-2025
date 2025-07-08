@@ -11,7 +11,7 @@
   <link href="https://unpkg.com/jspsych@6.3.1/css/jspsych.css" rel="stylesheet" />
   <style>
     .image-wrapper {
-      margin-bottom: 120px; /* Adds padding BELOW image to match Likert prompt spacing */
+      margin-bottom: 120px;
       text-align: center;
     }
 
@@ -113,24 +113,33 @@
     );
   });
 
-  jsPsych.init({
-  timeline: timeline,
-  on_finish: function () {
-    const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
-    
-    const responses = testData.map(trial => {
-      return {
-        image: trial.stimulus,  // image shown in the Likert question
-        response: trial.response
-      };
-    });
+  const endScreen = {
+    type: 'html-button-response',
+    stimulus: `
+      <p>Thank you for completing the experiment.</p>
+      <p>Your responses have been recorded.</p>
+      <p><strong>Please click the button below to continue.</strong></p>
+    `,
+    choices: ['Continue'],
+    on_finish: function () {
+      const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
 
-    // Send message to parent Qualtrics frame
-    window.parent.postMessage({
-      type: "jspsych_complete",
-      responses: responses
-    }, "*");
-  }
-});
+      const responses = testData.map(trial => ({
+        image: trial.stimulus,
+        response: trial.response
+      }));
+
+      window.parent.postMessage({
+        type: "jspsych_complete",
+        responses: responses
+      }, "*");
+    }
+  };
+
+  timeline.push(endScreen);
+
+  jsPsych.init({
+    timeline: timeline
+  });
 </script>
 </html>
