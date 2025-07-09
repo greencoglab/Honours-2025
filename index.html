@@ -143,33 +143,29 @@
       );
     });
 
+//added below:
     timeline.push({
-      type: 'html-button-response',
-      stimulus: `
-        <p>Thank you for completing the experiment.</p>
-        <p>Your responses have been recorded.</p>
-        <p><strong>Please click the button below to continue.</strong></p>
-      `,
-      choices: ['Continue'],
-      on_finish: function () {
-  const testData = jsPsych.data.get().filter({trial_type: 'survey-likert'}).values();
+  type: 'html-button-response',
+  stimulus: `
+    <h2>Thank you for completing the experiment.</h2>
+    <p>Your responses have been recorded.</p>
+    <p><strong>Please click the button below to continue.</strong></p>
+  `,
+  choices: ['Continue'],
+  on_finish: function () {
+    // Get all jsPsych data
+    const data = jsPsych.data.get().values();
 
-  const payload = testData.map(trial => ({
-    image: trial.stimulus.match(/src="([^"]+)"/)?.[1] || "unknown",
-    response: trial.response
-  }));
-  console.log("🚀 Sending payload to Qualtrics:", payload); //added line
-  window.parent.postMessage({
-    type: "jspsych_complete",
-    responses: payload
-  }, "*");
-}
-    });
+    console.log("Attempting to send data to Qualtrics...");
+    console.log("Payload:", data);
 
-    jsPsych.init({
-      timeline: timeline,
-      display_element: 'jspsych-target'
-    });
-  </script>
+    // Send to Qualtrics via postMessage
+    window.parent.postMessage({
+      type: "jspsych_complete",
+      responses: data
+    }, "*");
+  }
+});
+    </script>
 </body>
 </html>
