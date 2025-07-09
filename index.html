@@ -158,7 +158,7 @@
     image: trial.stimulus.match(/src="([^"]+)"/)?.[1] || "unknown",
     response: trial.response
   }));
-
+  console.log("🚀 Sending payload to Qualtrics:", payload); //added line
   window.parent.postMessage({
     type: "jspsych_complete",
     responses: payload
